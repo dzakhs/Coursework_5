@@ -6,7 +6,7 @@ def create_db_and_tables(db_name, params):
     conn.autocommit = True
     cur = conn.cursor()
 
-    cur.execute(f"DROP DATABASE {db_name}")
+
     cur.execute(f"CREATE DATABASE {db_name}")
 
     conn.close()
@@ -16,7 +16,7 @@ def create_db_and_tables(db_name, params):
     with conn.cursor() as cur:
         cur.execute("""
                 CREATE TABLE employeers (
-                    emp_id SERIAL PRIMARY KEY,
+                    emp_id int PRIMARY KEY,
                     name varchar(100) NOT NULL,
                     emp_url varchar (255) NOT NULL
                 )
@@ -25,8 +25,7 @@ def create_db_and_tables(db_name, params):
     with conn.cursor() as cur:
         cur.execute("""
                 CREATE TABLE vacancies (
-                    id SERIAL PRIMARY KEY,
-                    emp_id INT REFERENCES employeers(id),
+                    emp_id int REFERENCES employeers(emp_id),
                     name varchar(255) NOT NULL,
                     url varchar(255) NOT NULL,
                     salary_from int NOT NULL,
@@ -55,7 +54,7 @@ def insert_data(db_name, data, params):
                          vacancy['experience']['name'], vacancy['snippet']['responsibility']))
 
             cur.execute("""
-             INSERT INTO empoyeers(emp_id, name, url)
+             INSERT INTO employeers(emp_id, name, emp_url)
              VALUES (%s, %s, %s)
              """,
                         (vacancy['employer']['id'], vacancy['employer']['name'], vacancy['employer']['alternate_url']))
