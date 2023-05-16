@@ -51,7 +51,7 @@ def insert_data(db_name, data, params):
              INSERT INTO vacancies(emp_id, name, url, salary_from, salary_to, experience, description)
              VALUES (%s, %s, %s, %s, %s, %s, %s)
              """,
-                        (vacancy['empoloyer']['id'], vacancy['name'], vacancy['alternate_url'], salary_from, salary_to,
+                        (vacancy['employer']['id'], vacancy['name'], vacancy['alternate_url'], salary_from, salary_to,
                          vacancy['experience']['name'], vacancy['snippet']['responsibility']))
 
             cur.execute("""

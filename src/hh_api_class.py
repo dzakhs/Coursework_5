@@ -1,16 +1,16 @@
 import requests
-from src.company_id import companies_id
+
 class HeadHunterAPI:
     def __init__(self):
         self.url = "https://api.hh.ru/vacancies"
 
-    def get_vacancies(self,companies_id):
+    def get_vacancies(self,data):
         """
-            Метод получения данных о вакансиях с сайта
-            :param emp_id: id компании для поиска вакансий
-            :return: список со словарями
+            Метод получения данных о вакансиях с сайта hh.ru по id компании
+            param emp_id: id компании для поиска вакансий
+            return: список со словарями
         """
-        for emp_id in companies_id.values():
+        for emp_id in data.values():
             pages = 10
             params = {
                 "employer_id" : emp_id,
@@ -29,8 +29,6 @@ class HeadHunterAPI:
 
         return data
 
-hh = HeadHunterAPI()
-hh_vac = hh.get_vacancies(companies_id)
-print(hh_vac[1])
+
 
 
