@@ -10,11 +10,15 @@ def main():
 
     """
     params = config()
-    message = input("Программа для работы с базой данных вакансий HH, приветствует Вас,"
-                       "Для старта нажмите ENTER")
+    message = input("Программа для работы с базой данных вакансий HH приветствует Вас, "
+                       "для старта нажмите ENTER")
     hh = HeadHunterAPI()
-    data = hh.get_vacancies(companies_id)
-    db_name = input('для начала работы придумайте название базы данных:').lower()
+    data = []
+    for emp_id in companies_id:
+        vac_data = hh.get_vacancies(emp_id)
+        data.extend(vac_data)
+    print(len(data))
+    db_name = input('Для начала работы придумайте название базы данных:').lower()
     create_db_and_tables(db_name, params)
     insert_data(db_name, data, params)
     db = DBManager(db_name)
@@ -24,7 +28,7 @@ def main():
                         "Для вывода средней заработной платы по вакансиям введите 3\n"
                         "Для вывода вакансий с з\п выше средней введите 4\n"
                         "Для вывода вакансий по ключевому слову введите 5\n"
-                        "Для выхода из программы введите quit"
+                        "Для выхода из программы введите quit: "
                         )
         if user_input == '1':
             db.get_companies_and_vacancies_count(db_name, params)

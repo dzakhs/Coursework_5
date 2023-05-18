@@ -30,7 +30,7 @@ class DBManager:
         with psycopg2.connect(dbname=db_name, **params) as conn:
             with conn.cursor() as cur:
                 cur.execute("""
-                SELECT name, salary_from, salary_to, url, employeers.name 
+                SELECT vacancies.name, salary_from, salary_to, url, employeers.name 
                 FROM vacancies
                 INNER JOIN employeers USING(emp_id) 
                 """)
