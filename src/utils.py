@@ -13,11 +13,7 @@ def main():
     message = input("Программа для работы с базой данных вакансий HH приветствует Вас, "
                        "для старта нажмите ENTER")
     hh = HeadHunterAPI()
-    data = []
-    for emp_id in companies_id:
-        vac_data = hh.get_vacancies(emp_id)
-        data.extend(vac_data)
-    print(len(data))
+    data = hh.get_vacancies(companies_id)
     db_name = input('Для начала работы придумайте название базы данных:').lower()
     create_db_and_tables(db_name, params)
     insert_data(db_name, data, params)
