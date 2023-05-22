@@ -15,7 +15,7 @@ class HeadHunterAPI:
 
         pages = 10
         params = {
-            "employer_id" : emp_id,
+            "employer_id" : tuple(emp_id),
             "per_page" : 100,
             "area" : 113,
             "only_with_salary" : True
